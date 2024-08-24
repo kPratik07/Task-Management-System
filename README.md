@@ -4,7 +4,7 @@
 
 The Task Management System is a backend API built using Node.js and Express.js. It provides task management functionality with secure user authentication and role-based access control. The API uses MongoDB to store data and follows best practices for code quality, including dependency injection and proper design patterns.
 
-#You can get the deployed link from about section.
+You can get the deployed link from the about section.
 
 ## Features
 
@@ -15,124 +15,119 @@ The Task Management System is a backend API built using Node.js and Express.js. 
 - Secure Endpoints with Route Guards and Input Validation
 - Dependency Injection for Authentication, Role Management, and Task Handling
 
-## Technologies Used
+## Tech stacks
 
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT (JSON Web Token) for Authentication
-- bcryptjs for Password Hashing
-- dotenv for Environment Variables
-- Postman for API Testing
+- ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+- ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+- ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+- ![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+- ![bcryptjs](https://img.shields.io/badge/bcryptjs-000000?style=for-the-badge&logo=javascript&logoColor=white)
+- ![dotenv](https://img.shields.io/badge/dotenv-000000?style=for-the-badge&logo=dotenv&logoColor=white)
+- ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 ### API Endpoints
 
 #### Authentication
 
-#### Register User
+- **Register User**
 
-- URL: /api/auth/register
-- Method: POST
-- Headers: Content-Type: application/json
-- Body: json
+  - URL: `/api/auth/register`
+  - Method: `POST`
+  - Headers: `Content-Type: application/json`
+  - Body:
+    ```json
+    {
+      "name": "Pratik Raj",
+      "email": "kpratik07@gmail.com",
+      "password": "password123"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "token": "your_jwt_token_here(will be created)"
+    }
+    ```
 
-      {
-        "name": "Pratik Raj",
-        "email": "kpratik07@gmail.com",
-        "password": "password123"
-      }
-
-- Response: json
-
-      {
-        "token": "your_jwt_token_here(will be created)"
-      }
-
-- Login User
-
-- URL: /api/auth/login
-- Method: POST
-- Headers: Content-Type: application/json
-- Body: json
-
-  {
-  "email": "kpratik07@gmail.com",
-  "password": "password123"
-  }
-
-- Response: json
-
-       {
-         "token": "your_jwt_token_here"
-       }
+- **Login User**
+  - URL: `/api/auth/login`
+  - Method: `POST`
+  - Headers: `Content-Type: application/json`
+  - Body:
+    ```json
+    {
+      "email": "kpratik07@gmail.com",
+      "password": "password123"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "token": "your_jwt_token_here"
+    }
+    ```
 
 #### Tasks
 
-    - Get All Tasks
+- **Get All Tasks**
 
-    - URL: /api/tasks
-    - Method: GET
-    - Headers:
-    - Authorization: Bearer your_jwt_token_here
+  - URL: `/api/tasks`
+  - Method: `GET`
+  - Headers: `Authorization: Bearer your_jwt_token_here`
 
-#### Create a Task
+- **Create a Task**
 
-- URL: /api/tasks
-- Method: POST
-- Headers:
-- Content-Type: application/json
-- Authorization: Bearer your_jwt_token_here
-- Body: json
+  - URL: `/api/tasks`
+  - Method: `POST`
+  - Headers:
+    - `Content-Type: application/json`
+    - `Authorization: Bearer your_jwt_token_here`
+  - Body:
+    ```json
+    {
+      "title": "New Task",
+      "description": "Task description",
+      "priority": "High",
+      "status": "Pending",
+      "assignedTo": "userId"
+    }
+    ```
 
-      {
-        "title": "New Task",
-        "description": "Task description",
-        "priority": "High",
-        "status": "Pending",
-        "assignedTo": "userId"
-      }
+- **Update a Task**
 
-#### Update a Task
+  - URL: `/api/tasks/:taskId`
+  - Method: `PUT`
+  - Headers:
+    - `Content-Type: application/json`
+    - `Authorization: Bearer your_jwt_token_here`
+  - Body:
+    ```json
+    {
+      "title": "Updated Task",
+      "description": "Updated task description",
+      "priority": "Low",
+      "status": "Completed",
+      "assignedTo": "userId"
+    }
+    ```
 
-- URL: /api/tasks/:taskId
-- Method: PUT
-- Headers:
-- ontent-Type: application/json
-- Authorization: Bearer your_jwt_token_here
-- Body: json
+- **Delete a Task**
+  - URL: `/api/tasks/:taskId`
+  - Method: `DELETE`
+  - Headers:
+    - `Authorization: Bearer your_jwt_token_here`
 
-      {
-        "title": "Updated Task",
-        "description": "Updated task description",
-        "priority": "Low",
-        "status": "Completed",
-        "assignedTo": "userId"
-      }
+### Testing the API with Postman
 
-#### Delete a Task
+1. **Register a New User**: Make a POST request to `/api/auth/register` with the required fields in the body.
+2. **Login with the Registered User**: Make a POST request to `/api/auth/login` with the user's email and password.
+3. **Copy the Token from the Login Response**: Use this token to authenticate requests to protected routes.
+4. **Set Authorization Header in Postman**:
+   - Go to the Headers tab in Postman.
+   - Add a new header:
+     - Key: `Authorization`
+     - Value: `Bearer your_jwt_token_here`
 
-- URL: /api/tasks/:taskId
-- Method: DELETE
-- Headers:
-- Authorization: Bearer your_jwt_token_here
-- Testing the API with Postman
+### Connect with MongoDB to Store and Retrieve Data
 
-#### Register a New User:
-
-- Make a POST request to /api/auth/register with the required fields in the body.
-- Login with the Registered User:
-
-- Make a POST request to /api/auth/login with the user's email and password.
-- Copy the Token from the Login Response:
-
-- Use this token to authenticate requests to protected routes.
-- Set Authorization Header in Postman:
-
-- Go to the Headers tab in Postman.
-- Add a new header:
-- Key: Authorization
-- Value: Bearer your_jwt_token_here
-
-#you can connect with mongoose to store and retrieve data.
-
-#Thnk You for Visisting My Github
+Thank you for visiting my GitHub! Explore, contribute, and let's build something amazing together!
